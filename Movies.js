@@ -4,6 +4,7 @@ import {
   Text,
   View
 } from 'react-native';
+import MoviePoster from './MoviePoster';
 import { movies } from './data';
 
 export default class Movies extends Component {
@@ -11,7 +12,11 @@ export default class Movies extends Component {
     return (
       <View>
         <ScrollView>
-          {movies.map((movie, index) => <Text>{movie.title}</Text>)}
+          {movies.map((movie, index) => <MoviePoster
+  	  movie={movie}
+	  onOpen={this.openMovie}
+	  key={index}
+	/>)}
         </ScrollView>
       </View>
     );
