@@ -1,24 +1,86 @@
 import React, { Component } from 'react';
 import {
   ScrollView,
-  Text,
+  StyleSheet,
   View
 } from 'react-native';
-import MoviePoster from './MoviePoster';
 import { movies } from './data';
+import MoviePopup from './MoviePopup';
+import MoviePoster from './MoviePoster';
 
 export default class Movies extends Component {
+  // Add starting here
+  state = {
+    popupIsOpen: false,
+    // Day chosen by user
+    chosenDay: 0,       // choose first day by default
+    // Time chosen by user
+    chosenTime: null,
+  }
+
+  openMovie = (movie) => {
+    this.setState({
+      popupIsOpen: true,
+      movie,	
+    });
+  }
+
+  closeMovie = () => {
+    this.setState({
+      popupIsOpen: false,
+      // Reset values to default ones
+      chosenDay: 0,
+      chosenTime: null,
+    });
+  }
+
+  chooseDay = (day) => {
+    this.setState({
+      chosenDay: day,
+    });
+  }
+
+  chooseTime = (time) => {
+    this.setState({
+      chosenTime: time,
+    });
+  }
+  // Untill here
   render() {
     return (
-      <View>
-        <ScrollView>
+      <View style={styles.container}>
+        <ScrollView
+          contentContainerStyle={styles.scrollContent}
+		  // Hide all scroll indicators
+          showsHorizontalScrollIndicator={false}
+          showsVerticalScrollIndicator={false}
+        >
           {movies.map((movie, index) => <MoviePoster
-  	  movie={movie}
-	  onOpen={this.openMovie}
-	  key={index}
-	/>)}
+            movie={movie}
+            onOpen={this.openMovie}
+            key={index}
+          />)}
         </ScrollView>
+	<MoviePopup
+	  movie={this.state.movie}
+	  isOpen={this.state.popupIsOpen}
+	  onClose={this.closeMovie}
+	  chosenDay={this.state.chosenDay}
+	  chosenTime={this.state.chosenTime}
+	  onChooseDay={this.chooseDay}
+	  onChooseTime={this.chooseTime}
+	/>
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    paddingTop: 20,         // start below status bar
+  },
+  scrollContent: {
+    flexDirection: 'row',   // arrange posters in rows
+    flexWrap: 'wrap',       // allow multiple rows
+  },
+});
