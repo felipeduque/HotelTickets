@@ -6,7 +6,7 @@ Esquema y estructura de la aplicación de Reservas HotelTicket
 Index.js es el Puntos de entrada en la aplicación para plataformas iOS o Android respectivamente. Ambos van a renderizar solo un componente llamado App.
 Comencemos creando una nueva aplicación. Abra la aplicación Terminal y ejecute estos comandos para inicializar un nuevo proyecto.
 
-react-native init HotelTickets;
+react-native init HotelTickets
 
 cd HotelTickets
 
