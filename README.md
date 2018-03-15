@@ -22,7 +22,7 @@ Componente de Hoteles
 
 lista desplegable del póster de Hoteles.
 
-componente ScrollView, 
+componente ScrollView, Confirmation, popup, Poster, List, options, redux.
 
 Componente de la aplicación
 
